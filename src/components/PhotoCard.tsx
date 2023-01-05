@@ -5,9 +5,17 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { FC } from "react";
 
-const PhotoCard = () => {
+const PhotoCard:FC<{
+  title:string,
+  photoCount:number,
+  eventDate:string
+}> = ({title,photoCount,eventDate}) => {
+  const event = new Date(eventDate)
+  const date = event.toLocaleString('default', { month: 'short' })+" "+event.getDate()+", "+event.getFullYear()
+  
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -24,10 +32,10 @@ const PhotoCard = () => {
             component="div"
             sx={{ color: "#5D7FD8", fontWeight: "bold" }}
           >
-            Lizard
+            {title}
           </Typography>
-          <Typography variant="body2">123 Photos</Typography>
-          <Typography variant="body2">Date</Typography>
+          <Typography variant="body2">{photoCount} Photos</Typography>
+          <Typography variant="body2">{date}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>
