@@ -1,17 +1,11 @@
-import {
-  Box,
-  Container,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Img from "./img/bg.png";
 import axios from "axios";
 import PhotoCard from "../../components/PhotoCard";
+import Albums from "../../components/Albums";
 const List = () => {
-  // remain mockup data
   return (
     <Navbar>
       <Box
@@ -32,27 +26,9 @@ const List = () => {
           </Stack>
         </Container>
       </Box>
-      <Container sx={{padding:"3rem 0rem"}}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={4}>
-            <PhotoCard />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <PhotoCard />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <PhotoCard />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <PhotoCard />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <PhotoCard />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <PhotoCard />
-          </Grid>
-        </Grid>
+      <Container sx={{paddingTop:"3rem",paddingBottom:"3rem"}}>
+          <Albums />   
+             {/* doesn't set center for albums */}
       </Container>
     </Navbar>
   );
