@@ -20,7 +20,7 @@
 .postContent{
     position: relative;
     max-width: 1200px;
-    background-color: black;
+    padding: 1rem;
 }
 .postContent img{
     display: block;

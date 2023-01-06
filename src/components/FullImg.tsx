@@ -1,12 +1,21 @@
-import React from "react";
+import React, { FC } from "react";
 import styled from "../pages/gallery/fullimages.module.css";
 
-const FullImg = () => {
+const FullImg: FC<{
+  onClosePhoto: Function;
+  selectPhoto: {
+    thumbnail_url: string | null;
+    full_url: string | null;
+    date: string | null;
+  };
+}> = ({ onClosePhoto, selectPhoto }) => {
   return (
     <div className={styled.post}>
-      <div className={styled.postBg} />
+      <div className={styled.postBg} onClick={() => onClosePhoto()} />
       <div className={styled.postContent}>
-        <img src="https://images.unsplash.com/photo-1672843386042-ec530be0a5f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" />
+        <img
+          src={selectPhoto.full_url+""}
+        />
       </div>
     </div>
   );
