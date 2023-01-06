@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import axios from "axios";
 import React, { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -19,11 +19,11 @@ const Albums = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <Grid container spacing={2} justifyContent="center" alignItems="center">
+    <Grid container spacing={2} textAlign="center" display={{xs: "grid", sm: "flex"}} justifyContent="center">
       {data.map((el) => {
         return (
           <Grid item xs={12} sm={6} md={4} key={Math.random()}>
-            <Link to={`/list/${el.name}`} style={{textDecoration:"none"}}>
+            <Link to={`/gallery/albums/${el.name}`} style={{textDecoration:"none"}}>
               <PhotoCard
                 title={el.name}
                 photoCount={el.photo_count}

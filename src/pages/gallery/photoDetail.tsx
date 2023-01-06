@@ -7,15 +7,6 @@ import FullImg from "../../components/FullImg";
 import Navbar from "../../components/Navbar";
 import PhotoCard from "../../components/PhotoCard";
 
-export function axiosGet() {
-  return axios
-    .get("http://server2.bsthun.com:4480/mock/gallery-detail.json")
-    .then((res) => {
-      return res.data.data;
-    })
-    .catch((err) => console.log(err));
-}
-
 const PhotoDetail = () => {
   const params = useParams();
   const [data, setData] = useState<{
@@ -78,6 +69,7 @@ const PhotoDetail = () => {
       <FullImg onClosePhoto={onClosePhoto} selectPhoto={selectedPhoto} />
     );
   }
+  
 
   return (
     <Navbar>
@@ -101,23 +93,42 @@ const PhotoDetail = () => {
             ) : null}
           </Box>
           <Box>
-            <Grid container justifyContent="start" spacing={2}>
-              {photo?.map((photo) => {
+             {/* <Grid container justifyContent="start" spacing={2}> */}
+             <ImageList variant="masonry" cols={3} gap={8}>
+          {photo?.map((photo) => {
+            // const img = new Image();
+            // img.src =
+            //   photo.thumbnail_url
+            // img.onload = () => {
+            //   console.log(img.naturalWidth);
+            // };
+         
+          
                 return (
-                  <Grid item md={6} key={Math.random()}>
+                  // <Grid item md={6} key={Math.random()}>
+                  //   <img
+                  //     style={{
+                  //       borderRadius: "0.5rem",
+                  //       cursor: "pointer",
+                  //       width: "100%"
+                  //     }}
+                  //     src={photo.thumbnail_url}
+                  //     onClick={() => onSelectPhoto(photo)}
+                  //   />
+                  // </Grid>
+                  <ImageListItem key={Math.random()}>
                     <img
-                      style={{
-                        borderRadius: "0.5rem",
-                        cursor: "pointer",
-                        width: "100%"
-                      }}
-                      src={photo.thumbnail_url}
+                      src={`${photo.thumbnail_url}?w=500&fit=crop&auto=format`}
+                      srcSet={`${photo.thumbnail_url}?w=500&fit=crop&auto=format&dpr=2 2x`}
+                      alt={photo.date}
+                      loading="lazy"
                       onClick={() => onSelectPhoto(photo)}
                     />
-                  </Grid>
+                </ImageListItem>
                 );
               })}
-            </Grid>
+              </ImageList>
+            {/* </Grid> */}
             {photoItem}
           </Box>
         </Box>
@@ -127,3 +138,4 @@ const PhotoDetail = () => {
 };
 
 export default PhotoDetail;
+
