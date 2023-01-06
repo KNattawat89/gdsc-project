@@ -1,23 +1,23 @@
+import { List } from '@mui/material';
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import PhotoDetail from './pages/gallery/photoDetail';
+import HomePage from './pages/homePage';
+import Index from './pages/gallery';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+          <Route path='/' index element={<HomePage/>}/>
+          <Route path="/gallery" element={<Index />} />
+          <Route path="/gallery/albums" element={<List/>} />
+          <Route path="/gallery/albums/:title" element={<PhotoDetail/>} />
+
+      </Routes>
+    </BrowserRouter>
+    
   );
 }
 
