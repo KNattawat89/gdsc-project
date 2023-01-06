@@ -93,29 +93,10 @@ const PhotoDetail = () => {
             ) : null}
           </Box>
           <Box>
-             {/* <Grid container justifyContent="start" spacing={2}> */}
              <ImageList variant="masonry" cols={3} gap={8}>
           {photo?.map((photo) => {
-            // const img = new Image();
-            // img.src =
-            //   photo.thumbnail_url
-            // img.onload = () => {
-            //   console.log(img.naturalWidth);
-            // };
-         
-          
                 return (
-                  // <Grid item md={6} key={Math.random()}>
-                  //   <img
-                  //     style={{
-                  //       borderRadius: "0.5rem",
-                  //       cursor: "pointer",
-                  //       width: "100%"
-                  //     }}
-                  //     src={photo.thumbnail_url}
-                  //     onClick={() => onSelectPhoto(photo)}
-                  //   />
-                  // </Grid>
+
                   <ImageListItem key={Math.random()}>
                     <img
                       src={`${photo.thumbnail_url}?w=500&fit=crop&auto=format`}
@@ -123,6 +104,7 @@ const PhotoDetail = () => {
                       alt={photo.date}
                       loading="lazy"
                       onClick={() => onSelectPhoto(photo)}
+                      style={{cursor: "pointer"}}
                     />
                 </ImageListItem>
                 );
