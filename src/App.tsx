@@ -1,10 +1,10 @@
-import { List } from '@mui/material';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import PhotoDetail from './pages/gallery/photoDetail';
 import HomePage from './pages/homePage';
 import Index from './pages/gallery';
+import List from './pages/gallery/list';
 
 function App() {
   return (
