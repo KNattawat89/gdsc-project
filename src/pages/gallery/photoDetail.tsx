@@ -6,29 +6,18 @@ import CardDetail from "../../components/CardDetail";
 import FullImg from "../../components/FullImg";
 import Navbar from "../../components/Navbar";
 import PhotoCard from "../../components/PhotoCard";
+import {
+  AlbumForPhoto,
+  DataForPhoto,
+  Photo,
+  SelectedPhoto,
+} from "../../types/albums";
 
 const PhotoDetail = () => {
   const params = useParams();
-  const [data, setData] = useState<{
-    albums: {
-      name: string;
-      photo_count: number;
-      saved_count: number;
-      date: string;
-      cover_photo: string;
-    };
-    photo: { thumbnail_url: string; full_url: string; date: string }[];
-  }>();
-  const [albums, setAlbums] = useState<{
-    name: string;
-    photo_count: number;
-    saved_count: number;
-    date: string;
-    cover_photo: string;
-  }>();
-  const [photo, setPhoto] = useState<
-    { thumbnail_url: string; full_url: string; date: string }[]
-  >([]);
+  const [data, setData] = useState<DataForPhoto>();
+  const [albums, setAlbums] = useState<AlbumForPhoto>();
+  const [photo, setPhoto] = useState<Photo[]>([]);
 
   const getData = async () => {
     const res = await axios.get(
@@ -43,24 +32,20 @@ const PhotoDetail = () => {
     getData();
   }, []);
 
-  const [selectedPhoto, setSelectedPhoto] = useState<{
-    thumbnail_url: string | null;
-    full_url: string | null;
-    date: string | null;
-  }>({ thumbnail_url: null, full_url: null, date: null });
+  const [selectedPhoto, setSelectedPhoto] = useState<SelectedPhoto>({
+    thumbnail_url: null,
+    full_url: null,
+    date: null,
+  });
 
-  const onSelectPhoto = (photo: {
-    thumbnail_url: string | null;
-    full_url: string | null;
-    date: string | null;
-  }) => {
+  const onSelectPhoto = (photo: SelectedPhoto) => {
     setSelectedPhoto(photo);
   };
   const onClosePhoto = () => {
     setSelectedPhoto({ thumbnail_url: null, full_url: null, date: null });
   };
-  
-  let result = !Object.values(selectedPhoto).every(o => o === null);
+
+  let result = !Object.values(selectedPhoto).every((o) => o === null);
 
   let photoItem;
   // result check if selectPhoto is null or not -> if true = is not null
@@ -69,7 +54,6 @@ const PhotoDetail = () => {
       <FullImg onClosePhoto={onClosePhoto} selectPhoto={selectedPhoto} />
     );
   }
-  
 
   return (
     <Navbar>
@@ -93,10 +77,9 @@ const PhotoDetail = () => {
             ) : null}
           </Box>
           <Box>
-             <ImageList variant="masonry" cols={3} gap={8}>
-          {photo?.map((photo) => {
+            <ImageList variant="masonry" cols={3} gap={8}>
+              {photo?.map((photo) => {
                 return (
-
                   <ImageListItem key={Math.random()}>
                     <img
                       src={`${photo.thumbnail_url}?w=500&fit=crop&auto=format`}
@@ -104,12 +87,12 @@ const PhotoDetail = () => {
                       alt={photo.date}
                       loading="lazy"
                       onClick={() => onSelectPhoto(photo)}
-                      style={{cursor: "pointer"}}
+                      style={{ cursor: "pointer" }}
                     />
-                </ImageListItem>
+                  </ImageListItem>
                 );
               })}
-              </ImageList>
+            </ImageList>
             {/* </Grid> */}
             {photoItem}
           </Box>
@@ -120,4 +103,3 @@ const PhotoDetail = () => {
 };
 
 export default PhotoDetail;
-
