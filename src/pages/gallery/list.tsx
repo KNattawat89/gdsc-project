@@ -26,9 +26,9 @@ const List = () => {
           </Stack>
         </Container>
       </Box>
-      <Container sx={{paddingTop:"3rem",paddingBottom:"3rem"}}> 
-          <Albums />   
-             {/* doesn't set center for albums */}
+      <Container sx={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
+        {/* <Albums />    */}
+        {/* doesn't set center for albums */}
       </Container>
     </Navbar>
   );
