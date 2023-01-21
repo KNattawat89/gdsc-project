@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { Auth, getAuth, GoogleAuthProvider, signInWithRedirect,signOut } from "firebase/auth";
+import { User } from "../types/user";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,9 +22,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
-const signIn = signInWithRedirect(auth, provider);
 
-export default signIn
+export const signIn = async() => await signInWithRedirect(auth, provider)
+
+export const logout = async() => {
+  await signOut(auth)
+}
+ 
+function getRedirectResult(auth: Auth) {
+  throw new Error("Function not implemented.");
+}
+

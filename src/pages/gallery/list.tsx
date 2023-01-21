@@ -1,10 +1,11 @@
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Img from "./img/bg.png";
 import axios from "axios";
 import PhotoCard from "../../components/PhotoCard";
 import Albums from "../../components/Albums";
+import { logout } from "../../firebase";
 const List = () => {
   return (
     <Navbar>
@@ -30,6 +31,7 @@ const List = () => {
         {/* <Albums />    */}
         {/* doesn't set center for albums */}
       </Container>
+    <Button onClick={logout}>Signout</Button>
     </Navbar>
   );
 };
