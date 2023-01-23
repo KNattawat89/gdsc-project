@@ -14,3 +14,7 @@ export interface User  {
     customAuth:boolean	
     
 }
+
+// export interface ResultCredential {
+//     accessToken
+// }

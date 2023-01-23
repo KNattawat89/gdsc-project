@@ -3,42 +3,52 @@ import React, { useContext, useEffect, useState } from 'react';
 import  img  from "./img/wind.png";
 import img2 from "./img/Google.png";
 import { Link, useNavigate } from 'react-router-dom';
-import { auth, signIn } from '../../firebase';
-import { getRedirectResult } from 'firebase/auth';
+import { auth } from '../../firebase';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import authContext from '../../context/authContext';
-const Index = () => {
-  // console.log(signIn);
-  const [user, setUser] = useState<any>();
+import axios from 'axios';
+const HomeGallery = () => {
   const navigate = useNavigate()
-  const [loading, setloading] = useState(false);
- const context = useContext(authContext);
-  const fetchUser = async() => {
-    console.log(context.user);
-    const userCred = await getRedirectResult(auth)
-    console.log(userCred?.user);
-    
-    if (context.user) {
-      setloading(false)
-      navigate("/gallery/albums")
-    }
-    else{
-      navigate("/gallery")
-    }
-    // await auth.onAuthStateChanged(
-    //   user => {
-    //     setUser(user);
-    //   }
-    // )
-    // console.log(user);
+  const processCredential = async(result:any) => {
+    await GoogleAuthProvider.credentialFromResult (result)
+    //Get IdToken from backend
+    result.user.getIdToken().then((token:String) => {
+      axios.post('http://localhost:8000/api/account/login', {
+        id_token: token,
+      })
+      .then((response) => {
+        console.log(response);
+        
+        if(response.data.success) {
+          //Set token from backend to cookie
+          // document.cookie = 'token=' + response.data.data.token
+          navigate('/gallery/albums')
+        } else {
+         alert(response.data.message + "001")
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 500) {
+          alert(err.response.data + "002")
+        }
+        else {
+            alert(err.message + "003")
+        }
+      })
+    })
   }
-  useEffect(() => {
-  fetchUser()
 
-  }, [user]);
-
-  if(loading) return (
-    <Typography> loaddddd</Typography>
-  )
+ const signIn = () => {
+  const provider = new GoogleAuthProvider()
+  signInWithPopup(auth, provider)
+  .then((result) => {
+     processCredential(result)
+  })
+  .catch((error) => {
+     alert(error.message)
+  })
+ }
+ 
   
 
  
@@ -60,7 +70,7 @@ const Index = () => {
       <Stack direction="column" sx={{backgroundColor: "#00000080"}} width={{xs: "23rem",sm:"25rem"}} height="14.9rem" borderRadius="12px" mr={{xs: "0",md:"5.2rem"}} alignItems={"center"}>
        <Typography fontFamily="body2" fontWeight="600" mt="3.9rem" mb="1.5rem"> To getting started... </Typography>
      
-       <Box width="20.5rem" height="3.75rem" borderRadius="12px" border="2px solid white" display="flex" alignItems="center" onClick={() => {signIn() ;setloading(true)}} sx={{cursor: "pointer"}}>
+       <Box width="20.5rem" height="3.75rem" borderRadius="12px" border="2px solid white" display="flex" alignItems="center" onClick={signIn} sx={{cursor: "pointer"}}>
          <img src={img2} width="64px" height="32px" style={{marginLeft: "1rem", marginRight: "0.5rem"}}/>
          <Typography fontFamily="body2" fontWeight="600"> Sign in with Google </Typography>
        </Box>
@@ -73,4 +83,4 @@ const Index = () => {
   );
 }
 
-export default Index;
+export default HomeGallery;

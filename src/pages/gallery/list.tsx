@@ -5,8 +5,8 @@ import Img from "./img/bg.png";
 import axios from "axios";
 import PhotoCard from "../../components/PhotoCard";
 import Albums from "../../components/Albums";
-import { logout } from "../../firebase";
 const List = () => {
+  
   return (
     <Navbar>
       <Box
@@ -31,7 +31,7 @@ const List = () => {
         {/* <Albums />    */}
         {/* doesn't set center for albums */}
       </Container>
-    <Button onClick={logout}>Signout</Button>
+    {/* <Button onClick={logout}>Signout</Button> */}
     </Navbar>
   );
 };

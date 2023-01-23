@@ -1,6 +1,7 @@
 import { Box, Container, Typography } from "@mui/material";
 import React, { FC, ReactNode } from "react";
 import ImageIcon from "@mui/icons-material/Image";
+import LogoutNav from "./LogoutNav";
 
 const Navbar: FC<{
   children: ReactNode;
@@ -55,6 +56,7 @@ const Navbar: FC<{
                 borderRadius: "50%",
               }}
             ></Box>
+            <LogoutNav/>
           </Box>
         </Box>
       </Container>
