@@ -1,11 +1,19 @@
 import { Box, Container, Typography } from "@mui/material";
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useContext, useEffect } from "react";
 import ImageIcon from "@mui/icons-material/Image";
 import LogoutNav from "./LogoutNav";
+import { AuthContext } from "../context/authContext";
+import { profile } from "console";
+import { LoginInfo } from "../types/user";
 
 const Navbar: FC<{
   children: ReactNode;
 }> = ({ children }) => {
+  const {reload }= useContext(AuthContext) as LoginInfo
+  
+  useEffect(() => {
+		reload()
+	}, [])
   return (
     <Box
       sx={{
@@ -47,7 +55,7 @@ const Navbar: FC<{
               gap: "1rem",
             }}
           >
-            <Typography color="white">Saved</Typography>
+            <Typography color="white">m</Typography>
             <Box
               sx={{
                 width: "2.5rem",

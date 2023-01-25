@@ -9,13 +9,14 @@ import authContext from '../../context/authContext';
 import axios from 'axios';
 const HomeGallery = () => {
   const navigate = useNavigate()
+  const [check, setcheck] = useState(false);
   const processCredential = async(result:any) => {
-    await GoogleAuthProvider.credentialFromResult (result)
+     GoogleAuthProvider.credentialFromResult (result)
     //Get IdToken from backend
     result.user.getIdToken().then((token:String) => {
       axios.post('http://localhost:8000/api/account/login', {
         id_token: token,
-      })
+      },{withCredentials:true} )
       .then((response) => {
         console.log(response);
         
@@ -24,16 +25,16 @@ const HomeGallery = () => {
           // document.cookie = 'token=' + response.data.data.token
           navigate('/gallery/albums')
         } else {
-         alert(response.data.message + "001")
+         alert(response.data.message)
         }
       })
       .catch((err) => {
-        if (err.response.status === 500) {
-          alert(err.response.data + "002")
-        }
-        else {
-            alert(err.message + "003")
-        }
+        // if (err.response.status === 500) {
+        //   alert(err.response.data)
+        // }
+        // else {
+            alert(err +"login part")
+        // }
       })
     })
   }
@@ -47,6 +48,10 @@ const HomeGallery = () => {
   .catch((error) => {
      alert(error.message)
   })
+ }
+
+ if (check) {
+  return(<Typography>loadd</Typography>)
  }
  
   
@@ -70,7 +75,7 @@ const HomeGallery = () => {
       <Stack direction="column" sx={{backgroundColor: "#00000080"}} width={{xs: "23rem",sm:"25rem"}} height="14.9rem" borderRadius="12px" mr={{xs: "0",md:"5.2rem"}} alignItems={"center"}>
        <Typography fontFamily="body2" fontWeight="600" mt="3.9rem" mb="1.5rem"> To getting started... </Typography>
      
-       <Box width="20.5rem" height="3.75rem" borderRadius="12px" border="2px solid white" display="flex" alignItems="center" onClick={signIn} sx={{cursor: "pointer"}}>
+       <Box width="20.5rem" height="3.75rem" borderRadius="12px" border="2px solid white" display="flex" alignItems="center" onClick={() => { return signIn(), setcheck(true)}} sx={{cursor: "pointer"}}>
          <img src={img2} width="64px" height="32px" style={{marginLeft: "1rem", marginRight: "0.5rem"}}/>
          <Typography fontFamily="body2" fontWeight="600"> Sign in with Google </Typography>
        </Box>

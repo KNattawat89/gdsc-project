@@ -4,11 +4,11 @@ import PhotoDetail from './pages/gallery/photoDetail';
 import HomePage from './pages/homePage';
 import HomeGallery from './pages/gallery/homeGallery';
 import List from './pages/gallery/list';
-
+import { AuthContextProvider } from './context/authContext';
 function App() {
   
   return (
-    
+    <AuthContextProvider>
     <BrowserRouter>
       <Routes>
           <Route path='/' index element={<HomePage/>}/>
@@ -19,6 +19,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+    </AuthContextProvider>
     
   );
 }

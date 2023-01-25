@@ -18,3 +18,15 @@ export interface User  {
 // export interface ResultCredential {
 //     accessToken
 // }
+
+export interface Profile {
+    userId: string,
+    name: string,
+    picture: string,
+    email: string
+}
+
+export type LoginInfo = {
+    user: Profile | undefined,
+    reload: () => void
+}
