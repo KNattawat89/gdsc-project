@@ -1,3 +1,4 @@
+import { Player } from "@lottiefiles/react-lottie-player";
 import { Box, Container, Grid, ImageList, ImageListItem } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
@@ -7,6 +8,8 @@ import CardDetail from "../../components/CardDetail";
 import FullImg from "../../components/FullImg";
 import Navbar from "../../components/Navbar";
 import PhotoCard from "../../components/PhotoCard";
+import loading from '../../animation/loading.json'
+import errorPage from '../../animation/error.json'
 import {
   Album,
   AlbumForPhoto,
@@ -27,9 +30,12 @@ const PhotoDetail = () => {
   const [page, setpage] = useState(1);
   const [isAll, setIsAll] = useState(false);
   const [countPhoto, setcountPhoto] = useState(0);
-  
+  const [isLoading, setisLoading] = useState(true);
+  const [error, setError] = useState(false);
+  // const [isError, { on }] = u
+  // const [isLoading, { off }] = useState(true)
   // const [TOTAL_PAGES, setTOTAL_PAGES] = useState(1);
-  const photoPerPage = 25
+  const photoPerPage = 50
   const getData = async () => {
     if (isAll) return;
     return await  axios
@@ -45,7 +51,9 @@ const PhotoDetail = () => {
         setIsAll(true)
         window.removeEventListener('scroll', onScroll)
       }
-    });
+    }).catch((err) => setError(true))
+    .finally(() => setisLoading(false))
+    ;
   };
 
   const isFetching = useRef(false);
@@ -95,64 +103,103 @@ useEffect(() => {
       <FullImg onClosePhoto={onClosePhoto} selectPhoto={selectedPhoto} photos={photos}/>
     );
   }
+
+  // if (condition) {
+    
+  // }
   
   return (
     <>
-    <Navbar>
-      <Container sx={{ marginTop: "3rem", width: "100%" }}>
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { sm: "1fr 2fr" },
-            columnGap: { sm: "1rem" },
-            rowGap: { xs: "1rem" },
-          }}
+   {(() => {
+    if (error) {
+      return(
+        <Box width={"100vw"} height={"100vh"} display={"flex"} justifyContent={"center"} alignItems={"center"}>
+          <Player 
+          autoplay
+          speed={1}
+          loop
+          src={errorPage}
+          style={{height: "300px", width: "300px"}}
+          >
+          </Player>
+          </Box>
+      )
+    }
+    else if(isLoading) {
+      return(
+        <Box width={"100vw"} height={"100vh"} display={"flex"} justifyContent={"center"} alignItems={"center"}>
+        <Player 
+        autoplay
+        speed={1}
+        loop
+        src={loading}
+        style={{height: "300px", width: "300px"}}
         >
-          <Box>
-            {album ? (
-              <CardDetail
-                title={album.name}
-                date={album.date}
-                photoCount={countPhoto}
-              />
-            ) : null}
-          </Box>
-          <Box>
-            <ImageList variant="masonry" cols={3} gap={8}>
-              {photos.map((photo:Photo) => {
-               
-                
-                
-                console.log(countPhoto);
-                
-                const fullPhoto: SelectedPhoto = {
-                  image_base_url: album?.image_base_url,
-                  count: photo.photo_id - 1
-                }
-            //  console.log(photo);
-             
-                return (
-                 
-                  <ImageListItem key={Math.random()}>
-                    <img
-                      src={`${album?.thumbnail_base_url + "/" + photo.file_name}?w=500&fit=crop&auto=format`}
-                      srcSet={`${album?.thumbnail_base_url + "/" + photo.file_name}?w=500&fit=crop&auto=format&dpr=2 2x`}
-                      alt={album?.name}
-                      loading="lazy"
-                      onClick={() => onSelectPhoto(fullPhoto)}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </ImageListItem>
-               
-                );
-              })}
-            </ImageList>
-            {/* </Grid> */}
-            {photoItem}
-          </Box>
+        </Player>
         </Box>
-      </Container>
-    </Navbar>
+      )
+    }
+    else{
+      return (
+        <Navbar>
+        <Container sx={{ marginTop: "3rem", width: "100%" }}>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { sm: "1fr 2fr" },
+              columnGap: { sm: "1rem" },
+              rowGap: { xs: "1rem" },
+            }}
+          >
+            <Box>
+              {album ? (
+                <CardDetail
+                  title={album.name}
+                  date={album.date}
+                  photoCount={countPhoto}
+                />
+              ) : null}
+            </Box>
+            <Box>
+              <ImageList variant="masonry" cols={3} gap={8}>
+                {photos.map((photo:Photo) => {
+                 
+                  
+                  
+                  console.log(countPhoto);
+                  
+                  const fullPhoto: SelectedPhoto = {
+                    image_base_url: album?.image_base_url,
+                    count: photo.photo_id - 1
+                  }
+              //  console.log(photo);
+               
+                  return (
+                   
+                    <ImageListItem key={Math.random()}>
+                      <img
+                        src={`${album?.thumbnail_base_url + "/" + photo.file_name}?w=500&fit=crop&auto=format`}
+                        srcSet={`${album?.thumbnail_base_url + "/" + photo.file_name}?w=500&fit=crop&auto=format&dpr=2 2x`}
+                        alt={album?.name}
+                        loading="lazy"
+                        onClick={() => onSelectPhoto(fullPhoto)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </ImageListItem>
+                 
+                  );
+                })}
+              </ImageList>
+              {/* </Grid> */}
+              {photoItem}
+            </Box>
+          </Box>
+        </Container>
+      </Navbar>
+      )
+    }
+   })()}
+   
     {/* <div ref={triggerRef} className={clsx('trigger', {visible: loading})}>
       
     </div> */}

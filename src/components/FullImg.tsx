@@ -27,14 +27,14 @@ const FullImg: FC<{
           enabled: true
         }}
         navigation={true}
-        // style={{width: "100%",display: "flex", justifyContent: "center", alignItems: "center"}}
+        style={{width: "100%",display: "flex", justifyContent: "center", alignItems: "center"}}
         modules={[Keyboard, Pagination, Navigation]}
         className="mySwiper"
       >
         {photos.map((photo: Photo) => {
         
           return(
-            <SwiperSlide> <img
+            <SwiperSlide    style={{width: "100%",display: "flex", justifyContent: "center", alignItems: "center"}}> <img
             src={selectPhoto.image_base_url+"/" + photo.file_name}
           /></SwiperSlide>
           )

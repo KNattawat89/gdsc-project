@@ -7,6 +7,8 @@ import { auth } from '../../firebase';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import authContext from '../../context/authContext';
 import axios from 'axios';
+import { Player } from '@lottiefiles/react-lottie-player';
+import loading from '../../animation/loading.json'
 const HomeGallery = () => {
   const navigate = useNavigate()
   const [check, setcheck] = useState(false);
@@ -51,7 +53,18 @@ const HomeGallery = () => {
  }
 
  if (check) {
-  return(<Typography>loadd</Typography>)
+  return(
+    <Box width={"100vw"} height={"100vh"} display={"flex"} justifyContent={"center"} alignItems={"center"}>
+      <Player 
+      autoplay
+      speed={1}
+      loop
+      src={loading}
+      style={{height: "300px", width: "300px"}}
+      >
+      </Player>
+      </Box>
+  )
  }
  
   
