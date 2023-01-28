@@ -28,7 +28,7 @@ const List = () => {
         </Container>
       </Box>
       <Container sx={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
-        {/* <Albums />    */}
+        <Albums />   
         {/* doesn't set center for albums */}
       </Container>
     {/* <Button onClick={logout}>Signout</Button> */}

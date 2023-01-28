@@ -9,11 +9,13 @@ import { LoginInfo } from "../types/user";
 const Navbar: FC<{
   children: ReactNode;
 }> = ({ children }) => {
-  const {reload }= useContext(AuthContext) as LoginInfo
-  
+  const {user,reload }= useContext(AuthContext) as LoginInfo
   useEffect(() => {
 		reload()
 	}, [])
+
+  // console.log(user);
+  
   return (
     <Box
       sx={{
@@ -55,15 +57,16 @@ const Navbar: FC<{
               gap: "1rem",
             }}
           >
-            <Typography color="white">m</Typography>
+            <Typography color="white">{user?.display_name}</Typography>
             <Box
               sx={{
                 width: "2.5rem",
                 height: "2.5rem",
-                backgroundColor: "grey",
                 borderRadius: "50%",
               }}
-            ></Box>
+            >
+              <img style={{width: "2.5rem", height: "2.5rem", borderRadius: "50%"}} src={user?.photo_url + ""}/>
+            </Box>
             <LogoutNav/>
           </Box>
         </Box>

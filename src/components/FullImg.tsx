@@ -1,21 +1,45 @@
 import React, { FC } from "react";
 import styled from "../pages/gallery/fullimages.module.css";
-
+import {Swiper, SwiperSlide} from "swiper/react"
+import { Keyboard, Pagination, Navigation } from "swiper";
+import { Photo } from "../types/albums";
+import { PhotoSharp } from "@mui/icons-material";
+import { Box } from "@mui/material";
 const FullImg: FC<{
   onClosePhoto: Function;
   selectPhoto: {
-    thumbnail_url: string | null;
-    full_url: string | null;
-    date: string | null;
+    image_base_url: string | null | undefined;
+    count: any
   };
-}> = ({ onClosePhoto, selectPhoto }) => {
+  photos: Photo[];
+}> = ({ onClosePhoto, selectPhoto,photos }) => {
+  // console.log(selectPhoto.count);
+  
   return (
     <div className={styled.post}>
       <div className={styled.postBg} onClick={() => onClosePhoto()} />
       <div className={styled.postContent}>
-        <img
-          src={selectPhoto.full_url+""}
-        />
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={30}
+        initialSlide={selectPhoto.count}
+        keyboard={{
+          enabled: true
+        }}
+        navigation={true}
+        // style={{width: "100%",display: "flex", justifyContent: "center", alignItems: "center"}}
+        modules={[Keyboard, Pagination, Navigation]}
+        className="mySwiper"
+      >
+        {photos.map((photo: Photo) => {
+        
+          return(
+            <SwiperSlide> <img
+            src={selectPhoto.image_base_url+"/" + photo.file_name}
+          /></SwiperSlide>
+          )
+        })}
+         </Swiper>
       </div>
     </div>
   );

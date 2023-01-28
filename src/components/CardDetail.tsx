@@ -13,8 +13,7 @@ const CardDetail: FC<{
   title: string | undefined;
   photoCount: number | undefined;
   date: string | undefined;
-  savedPhoto: number | undefined;
-}> = ({ title, photoCount, date, savedPhoto }) => {
+}> = ({ title, photoCount, date }) => {
   let eventdate;
   if (date != undefined) {
     const event = new Date(date);
@@ -42,7 +41,6 @@ const CardDetail: FC<{
           <Typography variant="body2">{eventdate}</Typography>
           <Box sx={{ display: "flex", marginTop: "1rem" }}>
             <TurnedInIcon sx={{ color: "#637196" }} />
-            <Typography>{savedPhoto} Saved</Typography>
           </Box>
         </CardContent>
       </CardActionArea>

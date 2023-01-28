@@ -20,9 +20,9 @@ export interface User  {
 // }
 
 export interface Profile {
-    userId: string,
-    name: string,
-    picture: string,
+    user_id: string,
+    display_name: string,
+    photo_url: string,
     email: string
 }
 
