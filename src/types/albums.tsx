@@ -1,12 +1,15 @@
 export interface Album {
-  name: string;
-  photo_count: number;
-  date: string;
+  albums_id: string;
   cover_photo: string;
+  date: string;
+  image_base_url: string;
+  name: string;
+  thumbnail_base_url: string;
 }
 
 export interface Data {
-  albums: Album[];
+  album: Album;
+  photos: Photo[]
 }
 
 export interface RootObject {
@@ -23,9 +26,8 @@ export interface AlbumForPhoto {
 }
 
 export interface Photo {
-  thumbnail_url: string;
-  full_url: string;
-  date: string;
+  photo_id: number;
+  file_name: string;
 }
 
 export interface DataForPhoto {
@@ -33,7 +35,6 @@ export interface DataForPhoto {
   photos: Photo[];
 }
 export interface SelectedPhoto {
-  thumbnail_url: string | null;
-  full_url: string | null;
-  date: string | null;
+  image_base_url: string | null | undefined;
+  count: number | null | undefined
 }
