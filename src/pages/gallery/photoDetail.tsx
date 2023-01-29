@@ -12,17 +12,11 @@ import loading from '../../animation/loading.json'
 import errorPage from '../../animation/error.json'
 import {
   Album,
-  AlbumForPhoto,
-  Data,
-  DataForPhoto,
   Photo,
   SelectedPhoto,
 } from "../../types/albums";
 
-// const NUM_PER_PAGE = 15;
-// const TOTAL_PAGES = 10;
 const PhotoDetail = () => {
-  // const params = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [photos, setphotos] = useState<Photo[]>([]);
   const [album, setalbum] = useState<Album>();
@@ -32,15 +26,11 @@ const PhotoDetail = () => {
   const [countPhoto, setcountPhoto] = useState(0);
   const [isLoading, setisLoading] = useState(true);
   const [error, setError] = useState(false);
-  // const [isError, { on }] = u
-  // const [isLoading, { off }] = useState(true)
-  // const [TOTAL_PAGES, setTOTAL_PAGES] = useState(1);
   const photoPerPage = 50
   const getData = async () => {
     if (isAll) return;
     return await  axios
     .get(`http://localhost:8000/api/gallery/albums/photos?query=` + searchParams.get("query"), {withCredentials: true}).then(async(item) => {
-      // console.log(item.data.photos.length);
       if (page * photoPerPage <= item.data.photos.length + photoPerPage) {
         const fetchPhoto = await item.data.photos.slice(photoPerPage * (page - 1),page * photoPerPage)
         setalbum(item.data.album.album)
@@ -59,16 +49,13 @@ const PhotoDetail = () => {
   const isFetching = useRef(false);
 
   useEffect(() => {
-    console.log('name reredered!')
     getData().then(() => isFetching.current = false)
 }, [page])
 
 function onScroll(event: Event) {
-    console.log("scroll", window.scrollY, document.body.scrollHeight - window.innerHeight);
 
     if (window.scrollY > document.body.scrollHeight - window.innerHeight - 80) {
         if (!isFetching.current) {
-            console.log("Fetched");
             setpage(page => page + 1)
             isFetching.current = true;
         }
@@ -163,10 +150,6 @@ useEffect(() => {
             <Box>
               <ImageList variant="masonry" cols={3} gap={8}>
                 {photos.map((photo:Photo) => {
-                 
-                  
-                  
-                  console.log(countPhoto);
                   
                   const fullPhoto: SelectedPhoto = {
                     image_base_url: album?.image_base_url,

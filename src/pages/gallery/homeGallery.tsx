@@ -20,7 +20,6 @@ const HomeGallery = () => {
         id_token: token,
       },{withCredentials:true} )
       .then((response) => {
-        console.log(response);
         
         if(response.data.success) {
           //Set token from backend to cookie
@@ -31,10 +30,6 @@ const HomeGallery = () => {
         }
       })
       .catch((err) => {
-        // if (err.response.status === 500) {
-        //   alert(err.response.data)
-        // }
-        // else {
             alert(err +"login part")
         // }
       })

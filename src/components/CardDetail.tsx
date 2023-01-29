@@ -39,9 +39,6 @@ const CardDetail: FC<{
           </Typography>
           <Typography variant="body2">{photoCount} Photos</Typography>
           <Typography variant="body2">{eventdate}</Typography>
-          <Box sx={{ display: "flex", marginTop: "1rem" }}>
-            <TurnedInIcon sx={{ color: "#637196" }} />
-          </Box>
         </CardContent>
       </CardActionArea>
     </Card>
