@@ -5,6 +5,7 @@ export interface Album {
   image_base_url: string;
   name: string;
   thumbnail_base_url: string;
+  count: number
 }
 
 export interface Data {

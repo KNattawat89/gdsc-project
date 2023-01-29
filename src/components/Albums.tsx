@@ -66,7 +66,7 @@ const Albums = () => {
           display={{ xs: "grid", sm: "flex" }}
           justifyContent="center"
         >
-          {data.map((el) => {
+          {data.map((el:Album) => {
             return (
               <Grid item xs={12} sm={6} md={4} key={Math.random()}>
                 <Link
@@ -75,7 +75,7 @@ const Albums = () => {
                 >
                   <PhotoCard
                     title={el?.name}
-                    photoCount={10}
+                    photoCount={el.count}
                     eventDate={el?.date}
                     img={el?.cover_photo}
                   />

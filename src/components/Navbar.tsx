@@ -5,6 +5,8 @@ import LogoutNav from "./LogoutNav";
 import { AuthContext } from "../context/authContext";
 import { profile } from "console";
 import { LoginInfo } from "../types/user";
+import { Link } from "react-router-dom";
+
 
 const Navbar: FC<{
   children: ReactNode;
@@ -34,6 +36,7 @@ const Navbar: FC<{
             height: "100%",
           }}
         >
+          <Link to={"/gallery/albums"}>
           <Box
             sx={{
               display: "flex",
@@ -43,11 +46,13 @@ const Navbar: FC<{
               gap: "0.5rem",
             }}
           >
+       
             <ImageIcon sx={{ color: "white" }} fontSize="large" />
             <Typography color="white" fontWeight={"bold"} fontSize="1.25rem">
               Gallery
             </Typography>
           </Box>
+          </Link>
           <Box
             sx={{
               display: "flex",
