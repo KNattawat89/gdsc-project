@@ -1,0 +1,33 @@
+.post {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.postBg{
+    background-color: rgba(0, 0, 0, 0.736);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.postContent{
+    position: relative;
+    max-width: 80%;
+    padding: 1rem;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+.postContent img{
+    display: block;
+    max-width: 100%;
+    max-height: calc(100vh - 120px);
+    margin: auto 0;
+}
