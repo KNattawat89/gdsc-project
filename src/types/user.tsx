@@ -1,18 +1,17 @@
-export interface User  {
-    localId:string
-    email:string
-    emailVerified:boolean	
-    displayName:string
-    providerUserInfo: object[]	
-    photoUrl:string	
-    passwordHash:string	
-    passwordUpdatedAt:number	
-    validSince:string	
-    disabled:boolean	
-    lastLoginAt:string	
-    createdAt:string	
-    customAuth:boolean	
-    
+export interface User {
+	localId: string
+	email: string
+	emailVerified: boolean
+	displayName: string
+	providerUserInfo: object[]
+	photoUrl: string
+	passwordHash: string
+	passwordUpdatedAt: number
+	validSince: string
+	disabled: boolean
+	lastLoginAt: string
+	createdAt: string
+	customAuth: boolean
 }
 
 // export interface ResultCredential {
@@ -20,13 +19,13 @@ export interface User  {
 // }
 
 export interface Profile {
-    user_id: string,
-    display_name: string,
-    photo_url: string,
-    email: string
+	user_id: string
+	display_name: string
+	photo_url: string
+	email: string
 }
 
 export type LoginInfo = {
-    user: Profile | undefined,
-    reload: () => void
+	user: Profile | undefined
+	reload: () => void
 }
