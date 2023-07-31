@@ -2,7 +2,7 @@ import React, { createContext, FC, ReactNode, useState } from 'react'
 import { auth } from '../firebase'
 import { LoginInfo, Profile, User } from '../types/user'
 import { getRedirectResult } from 'firebase/auth';
-import axios from 'axios';
+import axios from "../utils/axios";
 
 export const AuthContext = createContext<LoginInfo|null>(null)
 export const AuthContextProvider: FC<{
@@ -11,7 +11,7 @@ export const AuthContextProvider: FC<{
   const [user, setUser] = useState<Profile>();
 
   const reload = () => {
-    axios.get('http://localhost:8000/api/account/profile',{withCredentials:true})
+    axios.get('/account/profile',{ withCredentials:true })
     .then((response)=> {
         // console.log(response.data);
         

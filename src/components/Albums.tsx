@@ -1,6 +1,6 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import { Box, Container, Grid } from "@mui/material";
-import axios from "axios";
+import axios from "../utils/axios";
 import React, { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Album } from "../types/albums";
@@ -13,7 +13,7 @@ const Albums = () => {
   const [Error, setError] = useState(false);
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/gallery/albums`, {withCredentials: true})
+      .get(`/gallery/albums`, {withCredentials: true})
       .then((res) => {
         
         if (res.data.success) {

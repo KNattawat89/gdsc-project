@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import authContext from '../../context/authContext';
-import axios from 'axios';
+import axios from "../../utils/axios";
 import { Player } from '@lottiefiles/react-lottie-player';
 import loading from '../../animation/loading.json'
 const HomeGallery = () => {
@@ -16,11 +16,10 @@ const HomeGallery = () => {
      GoogleAuthProvider.credentialFromResult (result)
     //Get IdToken from backend
     result.user.getIdToken().then((token:String) => {
-      axios.post('http://localhost:8000/api/account/login', {
+      axios.post('/account/login', {
         id_token: token,
       },{withCredentials:true} )
       .then((response) => {
-        
         if(response.data.success) {
           //Set token from backend to cookie
           // document.cookie = 'token=' + response.data.data.token

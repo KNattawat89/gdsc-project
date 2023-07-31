@@ -1,6 +1,6 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import { Box, Container, Grid, ImageList, ImageListItem } from "@mui/material";
-import axios from "axios";
+import axios from "../../utils/axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { isClassExpression } from "typescript";
@@ -30,7 +30,7 @@ const PhotoDetail = () => {
   const getData = async () => {
     if (isAll) return;
     return await  axios
-    .get(`http://localhost:8000/api/gallery/albums/photos?query=` + searchParams.get("query"), {withCredentials: true}).then(async(item) => {
+    .get(`/gallery/albums/photos?query=` + searchParams.get("query"), {withCredentials: true}).then(async(item) => {
       if (page * photoPerPage <= item.data.photos.length + photoPerPage) {
         const fetchPhoto = await item.data.photos.slice(photoPerPage * (page - 1),page * photoPerPage)
         setalbum(item.data.album.album)
