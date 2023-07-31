@@ -9,7 +9,7 @@ import {
   CardMedia,
   CardContent,
   Grid,
-  Link,
+  Link as MuiLink,
 } from "@mui/material";
 import React from "react";
 import Img from "./img/dodle.png";
@@ -18,6 +18,7 @@ import BookIcon from "@mui/icons-material/Book";
 import BubbleChartIcon from "@mui/icons-material/BubbleChart";
 import ImageIcon from "@mui/icons-material/Image";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -57,9 +58,12 @@ const HomePage = () => {
             in the chapter page in the Event Platform
           </Typography>
 
-          <Button variant="contained" href="#">
-            Visit chapter page
-          </Button>
+          <a
+            href="https://gdsc.community.dev/king-mongkuts-university-of-technology-thonburi/"
+            target="_blank"
+          >
+            <Button variant="contained">Visit chapter page</Button>
+          </a>
         </Stack>
       </Box>
       <Box
@@ -76,7 +80,10 @@ const HomePage = () => {
           margin="auto"
         >
           <Grid item xs={12} sm={6}>
-            <Link href="\bookstack" underline="none">
+            <MuiLink
+              href="https://gdsc.sit.kmutt.ac.th/bookstack"
+              underline="none"
+            >
               <Card>
                 <CardActionArea>
                   <CardContent>
@@ -104,7 +111,7 @@ const HomePage = () => {
                   </CardContent>
                 </CardActionArea>
               </Card>
-            </Link>
+            </MuiLink>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Card>
@@ -138,7 +145,7 @@ const HomePage = () => {
             </Card>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Link href="\gallery" underline="none">
+            <Link to="/gallery" style={{textDecoration: 'none'}}>
               <Card>
                 <CardActionArea>
                   <CardContent>

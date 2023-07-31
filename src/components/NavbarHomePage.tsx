@@ -49,7 +49,14 @@ export const NavbarHomePage = () => {
               gap: "1rem",
             }}
           >
-            <Typography color="black">Chapter Page</Typography>
+            <Typography
+              component="a"
+              href="https://gdsc.community.dev/king-mongkuts-university-of-technology-thonburi/"
+              target="_blank"
+              color="black"
+            >
+              Chapter Page
+            </Typography>
           </Box>
         </Box>
       </Container>
