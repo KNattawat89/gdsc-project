@@ -14,8 +14,6 @@ export const AuthContextProvider: FC<{
 		axios
 			.get('/account/profile', { withCredentials: true })
 			.then((response) => {
-				// console.log(response.data);
-
 				if (response.data.success) {
 					setUser(response.data.data)
 				} else {

@@ -26,7 +26,8 @@ const HomePage = () => {
 			<NavbarHomePage />
 			<Box
 				sx={{
-					backgroundImage: 'url("https://eng.kmutt.ac.th/wp-content/uploads/2017/10/banner-2.jpg")',
+					backgroundImage:
+						'url("https://res.cloudinary.com/startup-grind/image/upload/v1/gcs/platform-data-dsc/chapter_banners/0447_53210620-03-TEERUCH.jpg?md")',
 					backgroundRepeat: 'no-repeat',
 					backgroundSize: 'cover',
 					padding: { xs: '5rem 0rem', md: '8rem 0rem' },

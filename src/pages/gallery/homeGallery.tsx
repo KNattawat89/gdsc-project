@@ -5,7 +5,6 @@ import img2 from './img/Google.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import authContext from '../../context/authContext'
 import axios from '../../utils/axios'
 import { Player } from '@lottiefiles/react-lottie-player'
 import loading from '../../animation/loading.json'
@@ -88,7 +87,7 @@ const HomeGallery = () => {
 					<Typography variant="h6" fontWeight="600">
 						Google Student Developer Club
 						<br />
-						King Mongkut’s University of Technology Thonburi
+						King Mongkut's University of Technology Thonburi
 					</Typography>
 				</Stack>
 
